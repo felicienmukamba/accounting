@@ -1,6 +1,6 @@
 # React + Vite
 
-![React + Vite](C:/Users/Dev/Desktop/accounting/image.png)
+![React + Vite](accounting/image.png)
 
 This template provides a minimal setup to get React working in Vite with HMR (Hot Module Replacement) and some ESLint rules.
 
@@ -18,8 +18,6 @@ To get started with this template, follow these steps:
 1. Clone the repository.
 2. Install dependencies using your package manager of choice (npm, yarn, etc.).
 3. Run the development server:
-4. 
-Ouvrez votre navigateur et accédez à [http://localhost:3000](http://localhost:3000) pour voir votre application en fonctionnement.
 
 ## Scripts Disponibles
 
@@ -32,7 +30,10 @@ Lance le serveur de développement.
 Compile l'application pour la production dans le dossier `dist`.
 
 ### `npm run serve`
+
+Ouvrez votre navigateur et accédez à [http://localhost:3000](http://localhost:3000) pour voir votre application en fonctionnement.
 Servez l'application de production localement.
+
 
 ## Configuration Supplémentaire
 
