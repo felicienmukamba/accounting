@@ -9,25 +9,7 @@ import ProductDetails from './pages/ProductDetails';
 import Header from './components/Header';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1976d2', // Couleur primaire personnalisée
-    },
-    secondary: {
-      main: '#dc004e', // Couleur secondaire personnalisée
-    },
-  },
-  typography: {
-    h6: {
-      fontSize: '1.5rem', // Taille de la police pour le titre
-      fontWeight: 'bold', // Style de police pour le titre
-    },
-    body2: {
-      fontSize: '1rem', // Taille de la police pour le contenu du corps
-    },
-  },
-});
+const theme = createTheme({});
 
 const App = () => {
   return (

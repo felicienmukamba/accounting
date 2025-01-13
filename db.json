@@ -2,8 +2,8 @@
   "products": [
     {
       "id": "1",
-      "name": "JSON-Server",
-      "price": 75,
+      "name": "75d",
+      "price": null,
       "imageUrl": "https://as1.ftcdn.net/jpg/03/67/97/90/1000_F_367979072_UdBgmIp2RuFgLsbruOMBVmruR6jCDqfX.webp"
     },
     {
