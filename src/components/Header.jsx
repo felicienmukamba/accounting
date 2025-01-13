@@ -57,9 +57,6 @@ const Header = () => {
               <Link to="/" className={classes.link}>Accueil</Link>
             </Button>
             <Button color="inherit" className={classes.button}>
-              <Link to="/add" className={classes.link}>Ajouter</Link>
-            </Button>
-            <Button color="inherit" className={classes.button}>
               <Link to="/products" className={classes.link}>Liste</Link>
             </Button>
           </div>

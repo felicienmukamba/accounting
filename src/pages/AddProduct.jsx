@@ -25,18 +25,18 @@ const AddProduct = () => {
     <form onSubmit={handleSubmit}>
       <Stack spacing={2} mt={1}>
         <FormControl>
-          <InputLabel htmlFor="my-input">Product Name:</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" value={name} onChange={(e) => setName(e.target.value)} required />
+          <InputLabel htmlFor="product-name">Product Name:</InputLabel>
+          <Input id="product-name" value={name} onChange={(e) => setName(e.target.value)} required />
         </FormControl>
         <FormControl>
-          <InputLabel htmlFor="my-input">Product Price:</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" value={price} onChange={(e) => setPrice(e.target.value)} required />
+          <InputLabel htmlFor="product-price">Product Price:</InputLabel>
+          <Input id="product-price" value={price} onChange={(e) => setPrice(e.target.value)} required />
         </FormControl>
         <FormControl>
-          <InputLabel htmlFor="my-input">Product Image:</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} required />
+          <InputLabel htmlFor="product-image">Product Image:</InputLabel>
+          <Input id="product-image" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} required />
         </FormControl>
-        <Button type="submit" size="small" variant="contained" color="primary">Ajouter</Button>
+        <Button type="submit" size="small" variant="contained" color="primary">Add</Button>
       </Stack>
     </form>
   );

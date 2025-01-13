@@ -23,7 +23,7 @@ const productsSlice = createSlice({
   initialState: [],
   reducers: {
     setProducts: (state, action) => action.payload,
-    addProduct: (state, action) => [...state, action.payload],
+    addProduct: (state, action) => { state.push(action.payload); },
     updateProduct: (state, action) => state.map(product =>
       product.id === action.payload.id ? action.payload : product),
     deleteProduct: (state, action) => state.filter(product => product.id !== action.payload.id),
