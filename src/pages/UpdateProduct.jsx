@@ -22,7 +22,7 @@ const UpdateProduct = ({ product }) => {
   return (
     <form  onSubmit={handleSubmit}>
       <Stack spacing={2} mt={1}>
-        <TextField size="small" label="Product Name:" name="name" value={price} onChange={(e) => setName(e.target.value)} required/>
+        <TextField size="small" label="Product Name:" name="name" value={name} onChange={(e) => setName(e.target.value)} required/>
         <TextField size="small" label="Product Price:" name="price" value={price} onChange={(e) => setPrice(e.target.value)} required/>
         <TextField size="small" label="Image URL:" name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} required/>
         <Tooltip title="Edit PRODUCT">
