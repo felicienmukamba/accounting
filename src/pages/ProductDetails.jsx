@@ -1,12 +1,14 @@
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { detailProduct } from '../store/productsSlice';
+import { detailsProduct } from '../store/productsSlice';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -29,7 +31,8 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (!product) {
-      dispatch(detailProduct(productId));
+      // dispatch(detailsProduct(productId));
+      dispatch(detailsProduct({ id: productId }));
     }
   }, [dispatch, product, productId]);
 

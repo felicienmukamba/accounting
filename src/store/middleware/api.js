@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setProducts, addProduct, updateProduct, deleteProduct } from '../productsSlice';
+import { setProducts, addProduct, updateProduct, deleteProduct, detailsProduct } from '../productsSlice';
 
 const apiMiddleware = store => next => action => {
   switch(action.type) {
@@ -25,6 +25,12 @@ const apiMiddleware = store => next => action => {
       axios.delete(`http://localhost:5000/products/${action.payload.id}`)
         .then(() => {
           store.dispatch(deleteProduct(action.payload.id));
+        });
+      break;
+    case 'products/detailProduct':
+      axios.get(`http://localhost:5000/products/${action.payload.id}`)
+        .then(response => {
+          store.dispatch(detailsProduct(response.data));
         });
       break;
     default:

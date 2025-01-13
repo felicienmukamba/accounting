@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createProduct } from '../store/productsSlice';
+import { addProduct } from '../store/productsSlice';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
@@ -15,7 +15,7 @@ const AddProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createProduct({ name, price: parseFloat(price), imageUrl }));
+    dispatch(addProduct({ name, price: parseFloat(price), imageUrl }));
     setName('');
     setPrice('');
     setImageUrl('');
