@@ -6,10 +6,6 @@ import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import toast from 'react-hot-toast';
-
-
-
 
 const AddProduct = () => {
   const dispatch = useDispatch();
@@ -17,17 +13,12 @@ const AddProduct = () => {
   const [price, setPrice] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
-
   const handleSubmit = (e) => {
-    
     e.preventDefault();
-    toast.success('Product added successfully!');
-    dispatch(createProduct({ name, price: parseFloat(price), imageUrl: '' }));
-    
-    setImageUrl('');
+    dispatch(createProduct({ name, price: parseFloat(price), imageUrl }));
     setName('');
     setPrice('');
-    
+    setImageUrl('');
   };
 
   return (
@@ -45,8 +36,7 @@ const AddProduct = () => {
           <InputLabel htmlFor="my-input">Product Image:</InputLabel>
           <Input id="my-input" aria-describedby="my-helper-text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} required />
         </FormControl>
-
-        <Button type="submit" size="small" variant="contained" color="primary" >Ajouter</Button>
+        <Button type="submit" size="small" variant="contained" color="primary">Ajouter</Button>
       </Stack>
     </form>
   );

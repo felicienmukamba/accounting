@@ -1,3 +1,4 @@
+import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import store from './store/store';
@@ -8,7 +9,25 @@ import ProductDetails from './pages/ProductDetails';
 import Header from './components/Header';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const theme = createTheme(); // Créez un thème par défaut
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2', // Couleur primaire personnalisée
+    },
+    secondary: {
+      main: '#dc004e', // Couleur secondaire personnalisée
+    },
+  },
+  typography: {
+    h6: {
+      fontSize: '1.5rem', // Taille de la police pour le titre
+      fontWeight: 'bold', // Style de police pour le titre
+    },
+    body2: {
+      fontSize: '1rem', // Taille de la police pour le contenu du corps
+    },
+  },
+});
 
 const App = () => {
   return (
@@ -16,7 +35,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <Router>
           <Header />
-          <div className="">
+          <div className="App">
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route path="/add" element={<AddProduct />} />

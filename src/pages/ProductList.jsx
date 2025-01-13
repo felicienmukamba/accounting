@@ -1,16 +1,32 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts, removeProduct } from '../store/productsSlice';
-import UpdateProduct from './UpdateProduct';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import toast from 'react-hot-toast';
+import { fetchProducts } from '../store/productsSlice';
+import Cart from '../components/Cart';
+import { makeStyles } from '@mui/styles';
+import { Link } from 'react-router-dom';
 
-
-
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '16px',
+    marginTop: '16px',
+  },
+  item: {
+    flex: '1 1 calc(33.333% - 32px)',
+    boxSizing: 'border-box',
+    [theme.breakpoints.down('md')]: {
+      flex: '1 1 calc(50% - 16px)',
+    },
+    [theme.breakpoints.down('sm')]: {
+      flex: '1 1 100%',
+    },
+  },
+}));
 
 const ProductList = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
 
@@ -18,26 +34,18 @@ const ProductList = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const handleDelete = (id) => {
-    dispatch(removeProduct(id));
-    toast.success('Product added successfully!');
-  };
-
   return (
-     <table>
-      <tbody>
-        {
-        products.map((product) => 
-        <tr key={product.id}>
-        <td>{product.name}</td>
-        <td>{product.price}</td>
-        <td><img src={product.imageUrl} alt={product.name} /></td>
-        <td><IconButton size="small" color="error"  aria-label="delete" onClick={() => handleDelete(product.id)}>Delete <DeleteIcon fontSize="small" /></IconButton></td>
-        <td><UpdateProduct product={product} /></td>
-        </tr>)
-        }
-      </tbody>
-     </table>
+    <div className={classes.container}>
+      {products.map((product) => (
+        <Link to={`/products/${product.id}`} className={classes.item} key={product.id}>
+          <Cart 
+            name={product.name} 
+            price={product.price} 
+            imageUrl={product.imageUrl} 
+          />
+        </Link>
+      ))}
+    </div>
   );
 };
 

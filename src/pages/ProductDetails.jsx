@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchProducts } from '../store/productsSlice';
+import { detailProduct } from '../store/productsSlice';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -23,19 +22,19 @@ const useStyles = makeStyles((theme) => ({
 const ProductDetails = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  const product = useSelector((state) => 
+    state.products.find((product) => product.id === parseInt(productId, 10))
+  );
   const classes = useStyles();
 
   useEffect(() => {
-    if (products.length === 0) {
-      dispatch(fetchProducts());
+    if (!product) {
+      dispatch(detailProduct(productId));
     }
-  }, [dispatch, products.length]);
-
-  const product = products.find((product) => product.id === parseInt(productId, 10));
+  }, [dispatch, product, productId]);
 
   if (!product) {
-    return <Typography variant="h6">Product not found</Typography>;
+    return <Typography variant="h6" align="center">Loading...</Typography>;
   }
 
   return (

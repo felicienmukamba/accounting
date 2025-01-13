@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import Cart from '../components/cart';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../store/productsSlice';
-import Cart from '../components/cart';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 
@@ -26,27 +26,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Home = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    const classes = useStyles();
+    const dispatch = useDispatch();
+    const products = useSelector((state) => state.products);
+  
+    useEffect(() => {
+      dispatch(fetchProducts());
+    }, [dispatch]);
+    
+    return (
+        <div className={classes.container}>
+        {products.map((product) => (
+          <Link to={`/products/${product.id}`} className={classes.item} key={product.id}>
+            <Cart 
+              name={product.name} 
+              price={product.price} 
+              imageUrl={product.imageUrl} 
+            />
+          </Link>
+        ))}
+      </div>
+    )
+}
 
-  return (
-    <div className={classes.container}>
-      {products.map((product) => (
-        <Link to={`/products/${product.id}`} className={classes.item} key={product.id}>
-          <Cart 
-            name={product.name} 
-            price={product.price} 
-            imageUrl={product.imageUrl} 
-          />
-        </Link>
-      ))}
-    </div>
-  );
-};
-
-export default Home;
+export default Home
