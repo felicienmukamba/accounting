@@ -1,27 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../store/productsSlice';
-import Cart from '../components/Cart';
 import { makeStyles } from '@mui/styles';
+import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: '16px',
+    height: 400,
+    width: '100%',
     marginTop: '16px',
-  },
-  item: {
-    flex: '1 1 calc(33.333% - 32px)',
-    boxSizing: 'border-box',
-    [theme.breakpoints.down('md')]: {
-      flex: '1 1 calc(50% - 16px)',
-    },
-    [theme.breakpoints.down('sm')]: {
-      flex: '1 1 100%',
-    },
   },
 }));
 
@@ -34,17 +24,40 @@ const ProductList = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'name', headerName: 'Name', width: 150, editable: true },
+    { field: 'price', headerName: 'Price', width: 150, editable: true },
+    { field: 'imageUrl', headerName: 'Image URL', width: 200, editable: true },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      sortable: false,
+      width: 200,
+      renderCell: (params) => (
+        <Link to={`/products/${params.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Button size="small" color="primary">View</Button>
+        </Link>
+      ),
+    },
+  ];
+
+  const rows = products.map((product) => ({
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    imageUrl: product.imageUrl,
+  }));
+
   return (
     <div className={classes.container}>
-      {products.map((product) => (
-        <Link to={`/products/${product.id}`} className={classes.item} key={product.id}>
-          <Cart 
-            name={product.name} 
-            price={product.price} 
-            imageUrl={product.imageUrl} 
-          />
-        </Link>
-      ))}
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        checkboxSelection
+        disableSelectionOnClick
+      />
     </div>
   );
 };

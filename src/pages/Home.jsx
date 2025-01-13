@@ -1,9 +1,16 @@
-import Cart from '../components/cart';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../store/productsSlice';
 import { makeStyles } from '@mui/styles';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchProducts } from '../store/productsSlice';
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -23,31 +30,56 @@ const useStyles = makeStyles((theme) => ({
       flex: '1 1 100%',
     },
   },
+  media: {
+    height: 140,
+  },
+  root: {
+    maxWidth: 345,
+  },
 }));
 
 const Home = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
 
-    const classes = useStyles();
-    const dispatch = useDispatch();
-    const products = useSelector((state) => state.products);
-  
-    useEffect(() => {
-      dispatch(fetchProducts());
-    }, [dispatch]);
-    
-    return (
-        <div className={classes.container}>
-        {products.map((product) => (
-          <Link to={`/products/${product.id}`} className={classes.item} key={product.id}>
-            <Cart 
-              name={product.name} 
-              price={product.price} 
-              imageUrl={product.imageUrl} 
-            />
-          </Link>
-        ))}
-      </div>
-    )
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  return (
+    <div className={classes.container}>
+      {products.map((product) => (
+        <Link to={`/products/${product.id}`} className={classes.item} key={product.id} variant="outlined">
+          <Card className={classes.root}>
+            <CardActionArea>
+              <CardMedia
+                className={classes.media}
+                image={product.imageUrl}
+                title={product.name}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {product.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {product.price} USD
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <Button size="small" color="primary">
+                Share
+              </Button>
+              <Button size="small" color="primary">
+                Learn More
+              </Button>
+            </CardActions>
+          </Card>
+        </Link>
+      ))}
+    </div>
+  )
 }
 
-export default Home
+export default Home;

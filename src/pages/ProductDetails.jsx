@@ -30,11 +30,8 @@ const ProductDetails = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    if (!product) {
-      // dispatch(detailsProduct(productId));
-      dispatch(detailsProduct({ id: productId }));
-    }
-  }, [dispatch, product, productId]);
+    dispatch(detailsProduct(productId));
+  }, [dispatch, productId]);
 
   if (!product) {
     return <Typography variant="h6" align="center">Loading...</Typography>;
